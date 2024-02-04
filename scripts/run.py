@@ -5,7 +5,7 @@ from src.features.build_features import build_features
 from src.models.train_model import train_model
 from src.models.predict_model import predict_model
 
-@hydra.main(config_path='config/config.yaml')
+@hydra.main(config_path='../config/config.yaml')
 def run(cfg: DictConfig):
    
    # Step 1: Data preparation
