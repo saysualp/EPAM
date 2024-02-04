@@ -9,20 +9,9 @@ from src.models.train_model import train_model
 from src.models.predict_model import predict_model
 from src.visualization.visualize import visualize
 from pathlib import Path
-from hydra import initialize, compose
-from hydra.core.global_hydra import GlobalHydra
 
-def initialize_hydra():
-    if not GlobalHydra.instance().is_initialized():
-        # Using the context manager approach to initialize Hydra
-        with initialize(config_path="config"):
-            # Inside this context, Hydra is initialized, and compose can be used
-            cfg = compose(config_name="config.yaml")
-    else:
-        # Clear the existing Hydra instance if it's already initialized
-        GlobalHydra.instance().clear()
-        with initialize(config_path="config"):
-            cfg = compose(config_name="config.yaml")
+def load_hydra_config(config_path):
+    cfg = OmegaConf.load(config_path)
     return cfg
 
 def load_eda_data():
@@ -98,47 +87,52 @@ def render_eda_tab():
     fig.update_layout(title='Smoothed Sales Over Time by Family', xaxis_title='Date', yaxis_title='Sales (Qty)')
     st.plotly_chart(fig)
 
-# Main App Logic
-st.set_page_config(page_title="Sales Prediction Tool")
-cfg = initialize_hydra()
+def main():
+    cfg = load_hydra_config('config/config.yaml')
 
-tabs = ["Forecast Tool", "Descriptives"]
+    # Main App Logic
+    st.set_page_config(page_title="Sales Prediction Tool")
 
-st.sidebar.markdown("""
-<style>
-.big-font {
-    font-size:20px !important;
-}
-</style>
-""", unsafe_allow_html=True)
+    tabs = ["Forecast Tool", "Descriptives"]
 
-# Using the custom CSS class
-st.sidebar.markdown('<p class="big-font">Navigate</p>', unsafe_allow_html=True)
-tab = st.sidebar.radio("", tabs)
+    st.sidebar.markdown("""
+    <style>
+    .big-font {
+        font-size:20px !important;
+    }
+    </style>
+    """, unsafe_allow_html=True)
 
-if tab == "Forecast Tool":
-    st.markdown("<h1 style='text-align: center;'>Chain Level Forecast</h1>", unsafe_allow_html=True)
-    st.write("The section provides an interactive platform for generating sales forecasts across various family-store pairings within the retail chain.", unsafe_allow_html=True)
+    # Using the custom CSS class
+    st.sidebar.markdown('<p class="big-font">Navigate</p>', unsafe_allow_html=True)
+    tab = st.sidebar.radio("", tabs)
 
-    st.info("""
-    🔍 **Here’s how one can leverage this tool:**
+    if tab == "Forecast Tool":
+        st.markdown("<h1 style='text-align: center;'>Chain Level Forecast</h1>", unsafe_allow_html=True)
+        st.write("The section provides an interactive platform for generating sales forecasts across various family-store pairings within the retail chain.", unsafe_allow_html=True)
 
-    - **Forecast Length Selection:** Select the desired forecast length in days from slider.
+        st.info("""
+        **Here’s how one can leverage this tool:**
 
-    - **Family-Store Pair Identification:** Each family-store pair within the chain is uniquely identified by an ID number. Through a dropdown menu, select the ID corresponding to the specific family-store pair.
+        - **Forecast Length Selection:** Select the desired forecast length in days from slider.
 
-    - **Actual Values Comparison:** An option is available to display actual sales figures alongside the forecasted data for comparison.
+        - **Family-Store Pair Identification:** Each family-store pair within the chain is uniquely identified by an ID number. Through a dropdown menu, select the ID corresponding to the specific family-store pair.
 
-    Upon making these selections, clicking on the "Forecast" button generates the sales forecasts.
-    """)
-    render_forecast_tab(cfg)
+        - **Actual Values Comparison:** An option is available to display actual sales figures alongside the forecasted data for comparison.
 
-elif tab == "Descriptives":
-    st.markdown("<h1 style='text-align: center;'>Exploratory Data Analysis</h1>", unsafe_allow_html=True)
-    st.write("""
-    This section highlights some efforts from the exploratory data analysis that give an overall picture of the business's performance.
-             
-    The aim is to provide a general overview, showing where the business stands and how different segments compare. This includes looking at sales over time, understanding which families are popular, and spotting any significant changes from one period to the next.
-    """)
-    st.info("""It's important to note that the dashboards presented are just a part of the exploratory analysis. They've been selected to offer useful insights without overwhelming users with too much information.""", icon="📊")
-    render_eda_tab()
+        Upon making these selections, clicking on the "Forecast" button generates the sales forecasts.
+        """, icon="🔍")
+        render_forecast_tab(cfg)
+
+    elif tab == "Descriptives":
+        st.markdown("<h1 style='text-align: center;'>Exploratory Data Analysis</h1>", unsafe_allow_html=True)
+        st.write("""
+        This section highlights some efforts from the exploratory data analysis that give an overall picture of the business's performance.
+                
+        The aim is to provide a general overview, showing where the business stands and how different segments compare. This includes looking at sales over time, understanding which families are popular, and spotting any significant changes from one period to the next.
+        """)
+        st.info("""It's important to note that the dashboards presented are just a part of the exploratory analysis. They've been selected to offer useful insights without overwhelming users with too much information.""", icon="📊")
+        render_eda_tab()
+
+if __name__ == "__main__":
+    main()
