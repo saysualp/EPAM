@@ -1,4 +1,5 @@
 darts
+u8darts[notorch]
 feature_engine
 hydra-core
 omegaconf

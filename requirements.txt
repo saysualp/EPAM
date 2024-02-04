@@ -29,6 +29,8 @@ blinker==1.7.0
     # via streamlit
 cachetools==5.3.2
     # via streamlit
+catboost==1.2.2
+    # via u8darts
 certifi==2024.2.2
     # via requests
 charset-normalizer==3.3.2
@@ -40,6 +42,8 @@ cloudpickle==3.0.0
     #   shap
     #   statsforecast
     #   tsfresh
+cmdstanpy==1.2.0
+    # via prophet
 contourpy==1.2.0
     # via matplotlib
 cycler==0.12.1
@@ -74,8 +78,13 @@ gitdb==4.0.11
     # via gitpython
 gitpython==3.1.41
     # via streamlit
+graphviz==0.20.1
+    # via catboost
 holidays==0.41
-    # via darts
+    # via
+    #   darts
+    #   prophet
+    #   u8darts
 hydra-core==0.11.3
     # via -r requirements.in
 idna==3.6
@@ -84,6 +93,8 @@ idna==3.6
     #   yarl
 importlib-metadata==7.0.1
     # via streamlit
+importlib-resources==6.1.1
+    # via prophet
 jinja2==3.1.3
     # via
     #   altair
@@ -97,12 +108,15 @@ joblib==1.3.2
     #   pmdarima
     #   pyod
     #   scikit-learn
+    #   u8darts
 jsonschema==4.21.1
     # via altair
 jsonschema-specifications==2023.12.1
     # via jsonschema
 kiwisolver==1.4.5
     # via matplotlib
+lightgbm==4.3.0
+    # via u8darts
 lightning-utilities==0.10.1
     # via
     #   pytorch-lightning
@@ -115,9 +129,12 @@ markupsafe==2.1.5
     # via jinja2
 matplotlib==3.8.2
     # via
+    #   catboost
     #   darts
     #   nfoursid
+    #   prophet
     #   pyod
+    #   u8darts
 mdurl==0.1.2
     # via markdown-it-py
 mpmath==1.3.0
@@ -129,7 +146,9 @@ multidict==6.0.5
 networkx==3.2.1
     # via torch
 nfoursid==1.0.1
-    # via darts
+    # via
+    #   darts
+    #   u8darts
 numba==0.59.0
     # via
     #   pyod
@@ -139,15 +158,19 @@ numba==0.59.0
 numpy==1.26.3
     # via
     #   altair
+    #   catboost
+    #   cmdstanpy
     #   contourpy
     #   darts
     #   feature-engine
+    #   lightgbm
     #   matplotlib
     #   nfoursid
     #   numba
     #   pandas
     #   patsy
     #   pmdarima
+    #   prophet
     #   pyarrow
     #   pydeck
     #   pyod
@@ -155,6 +178,7 @@ numpy==1.26.3
     #   scikit-learn
     #   scipy
     #   shap
+    #   stanio
     #   statsforecast
     #   statsmodels
     #   streamlit
@@ -164,6 +188,7 @@ numpy==1.26.3
     #   torchmetrics
     #   triad
     #   tsfresh
+    #   u8darts
     #   utilsforecast
     #   xarray
     #   xgboost
@@ -175,7 +200,6 @@ packaging==23.2
     # via
     #   altair
     #   fugue-sql-antlr
-    #   hydra-core
     #   lightning-utilities
     #   matplotlib
     #   plotly
@@ -192,10 +216,13 @@ pandas==2.2.0
     # via
     #   -r requirements.in
     #   altair
+    #   catboost
+    #   cmdstanpy
     #   darts
     #   feature-engine
     #   nfoursid
     #   pmdarima
+    #   prophet
     #   qpd
     #   shap
     #   statsforecast
@@ -203,6 +230,7 @@ pandas==2.2.0
     #   streamlit
     #   triad
     #   tsfresh
+    #   u8darts
     #   utilsforecast
     #   xarray
 patsy==0.5.6
@@ -214,11 +242,16 @@ pillow==10.2.0
     #   matplotlib
     #   streamlit
 plotly==5.18.0
-    # via -r requirements.in
+    # via
+    #   -r requirements.in
+    #   catboost
 pmdarima==2.0.4
     # via
     #   darts
     #   tbats
+    #   u8darts
+prophet==1.1.5
+    # via u8darts
 protobuf==4.25.2
     # via
     #   streamlit
@@ -232,7 +265,9 @@ pydeck==0.8.1b0
 pygments==2.17.2
     # via rich
 pyod==1.1.2
-    # via darts
+    # via
+    #   darts
+    #   u8darts
 pyparsing==3.1.1
     # via matplotlib
 python-dateutil==2.8.2
@@ -261,6 +296,7 @@ requests==2.31.0
     #   fsspec
     #   streamlit
     #   tsfresh
+    #   u8darts
 rich==13.7.0
     # via streamlit
 rpds-py==0.17.1
@@ -277,10 +313,13 @@ scikit-learn==1.4.0
     #   shap
     #   tbats
     #   tsfresh
+    #   u8darts
 scipy==1.12.0
     # via
+    #   catboost
     #   darts
     #   feature-engine
+    #   lightgbm
     #   pmdarima
     #   pyod
     #   scikit-learn
@@ -290,11 +329,15 @@ scipy==1.12.0
     #   stumpy
     #   tbats
     #   tsfresh
+    #   u8darts
     #   xgboost
 shap==0.44.1
-    # via darts
+    # via
+    #   darts
+    #   u8darts
 six==1.16.0
     # via
+    #   catboost
     #   fs
     #   omegaconf
     #   patsy
@@ -307,8 +350,12 @@ smmap==5.0.1
     # via gitdb
 sqlglot==20.11.0
     # via fugue
+stanio==0.3.0
+    # via cmdstanpy
 statsforecast==1.7.2
-    # via darts
+    # via
+    #   darts
+    #   u8darts
 statsmodels==0.14.1
     # via
     #   darts
@@ -316,6 +363,7 @@ statsmodels==0.14.1
     #   pmdarima
     #   statsforecast
     #   tsfresh
+    #   u8darts
 streamlit==1.31.0
     # via -r requirements.in
 stumpy==1.12.0
@@ -323,7 +371,9 @@ stumpy==1.12.0
 sympy==1.12
     # via torch
 tbats==1.1.3
-    # via darts
+    # via
+    #   darts
+    #   u8darts
 tenacity==8.2.3
     # via
     #   plotly
@@ -349,11 +399,14 @@ tornado==6.4
     # via streamlit
 tqdm==4.66.1
     # via
+    #   cmdstanpy
     #   darts
+    #   prophet
     #   pytorch-lightning
     #   shap
     #   statsforecast
     #   tsfresh
+    #   u8darts
 triad==0.9.5
     # via
     #   adagio
@@ -369,10 +422,13 @@ typing-extensions==4.9.0
     #   pytorch-lightning
     #   streamlit
     #   torch
+    #   u8darts
 tzdata==2023.4
     # via pandas
 tzlocal==5.2
     # via streamlit
+u8darts[notorch]==0.27.2
+    # via -r requirements.in
 urllib3==2.2.0
     # via
     #   pmdarima
@@ -382,10 +438,17 @@ utilsforecast==0.0.26
 validators==0.22.0
     # via streamlit
 xarray==2024.1.1
-    # via darts
+    # via
+    #   darts
+    #   u8darts
 xgboost==2.0.3
-    # via darts
+    # via
+    #   darts
+    #   u8darts
 yarl==1.9.4
     # via aiohttp
 zipp==3.17.0
     # via importlib-metadata
+
+# The following packages are considered to be unsafe in a requirements file:
+# setuptools
