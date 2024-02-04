@@ -1,0 +1,97 @@
+paths:
+  input_data_path: data/raw
+  processed_data_path: data/processed/prod
+  interim_data_path: data/interim
+  external_data_path: data/external
+  model_save_path: models
+make_dataset:
+  fillna_method: backfill
+  filter_family:
+  - GROCERY I
+  - BEVERAGES
+  - PRODUCE
+  - CLEANING
+  - DAIRY
+  - BREAD/BAKERY
+  - POULTRY
+  - MEATS
+  - PERSONAL CARE
+  - DELI
+  remove_unusual_data:
+  - family:
+    - BEVERAGES
+    - PRODUCE
+    before_date: '2015-08-01'
+  - family:
+    - POULTRY
+    - DAIRY
+    before_date: '2013-12-01'
+  categorical_cols:
+  - id
+  - family
+  - city
+  - state
+  - type
+  - cluster
+  group_by:
+  - store_nbr
+  - family
+build_features:
+  date_features:
+    year: true
+    quarter: true
+    month: true
+    week: true
+    day_of_week: true
+    day_of_month: true
+    day_of_year: true
+    is_weekend: true
+    is_month_end: true
+    is_payroll: true
+    payroll_day: 15
+    earthquake_date: '2016-04-16'
+    earthquake_effect_window: 7
+  statistical_features:
+    sales:
+      mean: true
+      variance: true
+      standard_deviation: true
+      maximum: true
+      minimum: true
+      skewness: true
+      kurtosis: true
+      linear_trend:
+      - attr: pvalue
+      - attr: rvalue
+      - attr: intercept
+      - attr: slope
+  lag_features:
+    lags:
+    - 1
+    - 6
+    - 21
+    - 43
+    - 66
+    - 101
+  window_features:
+    windows:
+    - 5
+    - 12
+    - 33
+    - 42
+    - 91
+    functions:
+    - mean
+    - max
+    - std
+train:
+  forecast_horizon: 28
+  target_lags:
+  - -1
+  - -2
+  - -12
+  static_cov_cols:
+  - city
+  - state
+  - type
+  - cluster
