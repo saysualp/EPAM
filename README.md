@@ -1,12 +1,12 @@
 Chain Level Forecast
 ==============================
 
-## Executive Summary
+### Executive Summary
 
-### Problem Statement
+#### Problem Statement
 This project focuses on predicting sales for numerous product families across Favorita stores located in Ecuador. By utilizing training data that encompasses dates, details on stores and products, promotional statuses, and actual sales figures, the goal is to accurately forecast future sales. The forecast takes into account various influencing factors, including promotions and external economic factors.
 
-### Data Description
+#### Data Description
 - **train.csv**: Contains time series data of features such as `store_nbr`, `family`, and `onpromotion`, along with the target variable `sales`.
   - `store_nbr` denotes the store where products are sold.
   - `family` indicates the product type.
@@ -19,16 +19,16 @@ This project focuses on predicting sales for numerous product families across Fa
 
 **Additional Notes**: Factors such as bi-weekly public sector wage payments and external events like the 2016 Ecuador earthquake are considered for their potential impact on sales.
 
-### Approach
+#### Approach
 The project adopts a comprehensive approach involving:
 1. **Exploratory Data Analysis (EDA)** to understand the data.
 2. **Feature Engineering** to prepare the data for modeling.
 3. **Model Training** focusing on tranining individual family-store combinations using LightGBM, employing a recursive strategy.
 
-### Results
+#### Results
 The model's performance is evaluated using MAPE (Mean Absolute Percentage Error) and RMSE (Root Mean Square Error), achieving around 23% MAPE and 215 RMSE. These metrics indicate the model's consistency and robustness through backtesting.
 
-### Tech Stack
+#### Tech Stack
 - **Repo Building**: Utilizes Cookiecutter for structured project setup.
 - **Config Management**: Employs Hydra for flexible configuration management.
 - **Code Quality**: Maintains code quality through Flake8 and Black.
@@ -92,14 +92,14 @@ Usage
 ------------
 This project provides two main methods for users to access sales forecast results:
 
-### 1. Generating Forecasts Locally
+#### 1. Generating Forecasts Locally
 Users interested in running the forecast pipeline locally to generate predictions can do so by executing the following command in the terminal:
 
 `python3 -m scripts.run`
 
 This command triggers the forecasting script, which then processes the data according to the configurations set in `config.yaml`. As a result, it outputs the predicted sales for each product family across all Favorita stores.
 
-### 2. Interactive Web Application
+#### 2. Interactive Web Application
 For those seeking an interactive experience, an online application has been developed using Streamlit. This application allows users to view and interact with the sales forecasts directly through a web browser.
 
 The web application can be accessed here: [Chain Level Forecast App](https://chainlevelforecast.streamlit.app)
@@ -108,10 +108,4 @@ The application features a user-friendly interface, enabling users to select spe
 
 References
 ------------
-@misc{favorita-grocery-sales-forecasting,
-    author = {Corporación Favorita, inversion, Julia Elliott, Mark McDonald},
-    title = {Corporación Favorita Grocery Sales Forecasting},
-    publisher = {Kaggle},
-    year = {2017},
-    url = {https://kaggle.com/competitions/favorita-grocery-sales-forecasting}
-}
+Corporación Favorita, inversion, Julia Elliott, Mark McDonald. (2017). Corporación Favorita Grocery Sales Forecasting. [View on Kaggle](https://kaggle.com/competitions/favorita-grocery-sales-forecasting)
