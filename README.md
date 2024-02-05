@@ -1,12 +1,13 @@
 Chain Level Forecast
 ==============================
 
-### Executive Summary
+Executive Summary
+------------
 
 #### Problem Statement
 This project focuses on predicting sales for numerous product families across Favorita stores located in Ecuador. By utilizing training data that encompasses dates, details on stores and products, promotional statuses, and actual sales figures, the goal is to accurately forecast future sales. The forecast takes into account various influencing factors, including promotions and external economic factors.
 
-#### Data Description
+#### Data
 - **train.csv**: Contains time series data of features such as `store_nbr`, `family`, and `onpromotion`, along with the target variable `sales`.
   - `store_nbr` denotes the store where products are sold.
   - `family` indicates the product type.
