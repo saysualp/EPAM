@@ -8,3 +8,6 @@ plotly
 scikit_learn
 streamlit
 tsfresh
+black
+flake8
+isort
