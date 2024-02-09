@@ -11,3 +11,6 @@ tsfresh
 black
 flake8
 isort
+pytest
+pipreqs
+pip-tools
